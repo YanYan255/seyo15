@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive AI</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    #container {
+      position: relative;
+      width: 800px; /* Increased container width to accommodate larger AI size */
+      height: 400px; /* Added height to the container to position the AI at the bottom */
+      margin: 50px auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8); /* Added semi-transparent white background for readability */
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden; /* Hide overflow content */
+    }
+    #ai-icon {
+      width: 300px; /* Adjusted AI size to 300 pixels wide */
+      height: auto; /* Adjust height automatically */
+      display: block;
+      animation: moveAndBlink 5s infinite alternate;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      z-index: 1; /* Ensure icon is on top of the content */
+    }
+    @keyframes moveAndBlink {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+    .callout {
+      padding: 10px; /* Adjust padding to fit the callout content */
+      border-radius: 10px;
+      border: 1px solid #ccc; /* Add border for visibility */
+      background-color: #f9f9f9;
+      position: absolute;
+      bottom: 50%;
+      left: calc(300px + 40px); /* Adjusted position to be beside the AI icon */
+      transform: translateY(50%);
+      z-index: 0; /* Ensure callout is behind the AI icon */
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      background-color: #cccccc; /* Grey background color */
+      color: #333; /* Dark text color */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #999999; /* Darker grey on hover */
+    }
+    .button-column {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
+    .button-column button {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="container">
+  <img id="ai-icon" src="https://media4.giphy.com/media/nQASPLzc7zbJpqjZDX/giphy.gif?cid=6c09b952rawtevi9cjdcenh9k5ztjrpkb5z411n7xo2ri785&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=s" alt="AI Icon">
+  <div id="response" class="callout">
+    <p>Welcome back, Yanyan!</p> <!-- Updated initial message -->
+  </div>
+</div>
+
+<div class="button-column">
+  <button id="advice-btn">Give Advice</button>
+  <button id="activity-btn">Give Activity</button>
+</div>
+
+<script>
+  var adviceList = [
+    "Embrace failure as a stepping stone to success.",
+    "Practice gratitude daily.",
+    "Always be curious and never stop learning.",
+    "Surround yourself with positive influences.",
+    "Take care of your physical health.",
+    "Set clear, achievable goals.",
+    "Trust your instincts.",
+    "Prioritize quality over quantity.",
+    "Invest in meaningful relationships.",
+    "Learn to say no when necessary.",
+    "Take calculated risks.",
+    "Stay humble, but confident.",
+    "Be adaptable to change.",
+    "Find time for solitude and reflection.",
+    "Keep a journal to track your progress.",
+    "Foster empathy and understanding.",
+    "Take breaks to recharge.",
+    "Seek feedback and constructive criticism.",
+    "Don't compare yourself to others.",
+    "Practice active listening.",
+    "Cultivate patience and resilience.",
+    "Be kind to yourself and others.",
+    "Set boundaries to protect your time and energy.",
+    "Celebrate small victories along the way.",
+    "Stay organized and prioritize tasks.",
+    "Practice mindfulness and meditation.",
+    "Don't be afraid to ask for help.",
+    "Focus on solutions, not problems."
+  ];
+
+  var activityList = [
+    "Watch a funny movie or TV show.",
+    "Take up a hobby you enjoy, like painting or cooking.",
+    "Go for a bike ride or a hike in nature.",
+    "Try a new recipe and cook yourself a delicious meal.",
+    "Practice mindfulness or meditation for a few minutes.",
+    // Add more activities here
+    "Read a book you've been meaning to read.",
+    "Write in a journal about your thoughts and feelings.",
+    "Do some yoga or stretching exercises.",
+    "Visit a museum or art gallery.",
+    "Listen to your favorite music and dance around the house.",
+    "Volunteer for a cause you care about.",
+    "Start a DIY project or home improvement task.",
+    "Take a long bath or shower to relax.",
+    "Plan a day trip to explore a nearby town or nature spot.",
+    "Organize and declutter a room in your home.",
+    "Start learning a new language or skill online.",
+    "Plant some flowers or vegetables in your garden.",
+    "Have a picnic in the park with friends or family.",
+    "Attend a local community event or festival.",
+    "Go stargazing on a clear night.",
+    "Try a new restaurant or café in your area.",
+    "Create a vision board with your goals and aspirations.",
+    "Practice deep breathing exercises to reduce stress.",
+    "Play a board game or card game with loved ones.",
+    "Write down three things you're grateful for each day.",
+    "Go for a walk or run outdoors to get some fresh air and exercise.",
+    "Call or video chat with a friend or family member.",
+    "Take photos of things that inspire you or bring you joy.",
+    "Plan a weekend getaway to a nearby destination.",
+    "Try a new hobby or craft, like knitting or woodworking."
+  ];
+
+  var responseDiv = document.getElementById('response');
+
+  function getRandomItem(array) {
+    return array[Math.floor(Math.random() * array.length)];
+  }
+
+  function displayResponse(response) {
+    responseDiv.innerHTML = "<p>" + response + "</p>";
+  }
+
+  document.getElementById('advice-btn').addEventListener('click', function() {
+    var advice = getRandomItem(adviceList);
+    displayResponse("<strong>Advice:</strong> " + advice);
+  });
+
+  document.getElementById('activity-btn').addEventListener('click', function() {
+    var activity = getRandomItem(activityList);
+    displayResponse("<strong>Activity:</strong> " + activity);
+  });
+</script>
+
+</body>
+</html>
